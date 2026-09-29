@@ -1,0 +1,19 @@
+# fft_tools.py
+import numpy as np
+
+def compute_fft(x, fs):
+    """
+    Calcula FFT de x y devuelve (X_fft, freqs).
+    Usa np.fft.fft y np.fft.fftfreq para eje de frecuencias.
+    """
+    N = len(x)
+    X = np.fft.fft(x)
+    freqs = np.fft.fftfreq(N, d=1/fs)
+    return X, freqs
+
+def shift_freq(X, freqs):
+    """
+    Aplica fftshift a X y al vector de frecuencias.
+    Retorna (X_shifted, freqs_shifted).
+    """
+    return np.fft.fftshift(X), np.fft.fftshift(freqs)
