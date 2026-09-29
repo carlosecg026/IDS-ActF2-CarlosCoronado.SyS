@@ -1,0 +1,20 @@
+# plots.py
+import matplotlib.pyplot as plt
+
+def plot_signal(t, x, title):
+    plt.figure()
+    plt.plot(t, x)
+    plt.title(title)
+    plt.xlabel('Tiempo (s)')
+    plt.ylabel('Amplitud')
+    plt.grid(True)
+    plt.tight_layout()
+
+def plot_spectrum(freqs, X, title_mag, title_phase):
+    X_shift, freqs_shift = np.fft.fftshift(X), np.fft.fftshift(freqs)
+    plt.figure(figsize=(6,4))
+    plt.plot(freqs_shift, np.abs(X_shift))
+    plt.title(title_mag); plt.xlabel('Frecuencia (Hz)'); plt.grid(True)
+    plt.figure(figsize=(6,4))
+    plt.plot(freqs_shift, np.angle(X_shift))
+    plt.title(title_phase); plt.xlabel('Frecuencia (Hz)'); plt.grid(True)
