@@ -1,0 +1,24 @@
+# main.py
+import numpy as np
+from signals import rect_pulse, unit_step, sinusoid
+from fft_tools import compute_fft, shift_freq
+from plots import plot_signal, plot_spectrum
+
+fs = 100.0  # Hz
+T = 1.0     # s
+t = np.arange(0, T, 1/fs)
+
+# Generar señales
+pulse = rect_pulse(t, 0.4, 0.6)
+step = unit_step(t, 0.2)
+sine = sinusoid(t, 5.0)
+
+# Graficar señales en tiempo
+plot_signal(t, pulse, "Pulso rectangular")
+plot_signal(t, step, "Escalón unitario")
+plot_signal(t, sine, "Señal senoidal")
+
+# Calcular y graficar FFTs
+for x, name in zip([pulse, step, sine], ["Pulso", "Escalón", "Seno"]):
+    X, freqs = compute_fft(x, fs)
+    plot_spectrum(freqs, X, f"FFT Magnitud ({name})", f"FFT Fase ({name})")
