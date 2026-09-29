@@ -1,0 +1,18 @@
+# signals.py
+import numpy as np
+
+def rect_pulse(t, t_start, t_end):
+    """Genera un pulso rectangular en t con valor 1 entre t_start y t_end."""
+    x = np.zeros_like(t)
+    x[(t >= t_start) & (t < t_end)] = 1.0
+    return x
+
+def unit_step(t, t0=0):
+    """Genera un escalón unitario (0 antes de t0, 1 después)."""
+    x = np.zeros_like(t)
+    x[t >= t0] = 1.0
+    return x
+
+def sinusoid(t, freq):
+    """Genera una señal sin(2π f t)."""
+    return np.sin(2 * np.pi * freq * t)
